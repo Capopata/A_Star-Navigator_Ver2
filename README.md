@@ -28,11 +28,8 @@ cd A_Star-Navigator_Ver2
 
 ### 2. Cài đặt thư viện (nếu cần)
 
-```bash
-pip install -r requirements.txt
-```
 
-> **Lưu ý**: Ứng dụng sử dụng các thư viện chuẩn của Python (`tkinter`, `turtle`, `random`, `heapq`, `time`). Nếu dùng Python bản đầy đủ, không cần cài thêm gì.
+> **Lưu ý**: Ứng dụng sử dụng các thư viện chuẩn của Python (`tkinter`, `turtle`, `random`, `heapq`, `time`, `collections`). Nếu dùng Python bản đầy đủ, không cần cài thêm gì.
 
 ---
 
@@ -56,11 +53,10 @@ python main.py
 
 ```
 A_Star-Navigator_Ver2/
-├── main.py                 # Giao diện và luồng chính
-├── map.py                  # Sinh bản đồ, điểm start/goal
+├── main.py                 # Thực thi
+├── map_utils.py                  # Sinh bản đồ, điểm start/goal
 ├── pathfinding.py          # Thuật toán A* và BFS
-├── utils.py                # Các hàm hỗ trợ
-├── requirements.txt
+├── App.py                # Giao diện chính
 └── README.md
 ```
 
