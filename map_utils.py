@@ -226,6 +226,10 @@ class Map:
         amr2.down()
         
         goal_distance = []
+        list_t_a_star = []
+        list_t_bfs = []
+        t_a_star = 0
+        t_bfs = 0
         
         while goal_node:
             goal_distance = [(g, pathfinding.function_distance(*start_node, *g)) for g in goal_node]
@@ -236,12 +240,15 @@ class Map:
             
             t0 = perf_counter()
             path_a_star = pathfinding.astar(mmap, start_node, nearest_goal)
-            t_a_start = perf_counter()-t0
+            t0 = perf_counter()-t0
+            list_t_a_star.append(t0)
+            t_a_star +=t0
             
             t1 = perf_counter()
             path_bfs = pathfinding.bfs(mmap, start_node, nearest_goal)
-            t_bfs = perf_counter() - t1
-            
+            t1 = perf_counter() - t1
+            list_t_bfs.append(t1)
+            t_bfs +=t1
             if not path_a_star and not path_bfs:
                 print("Không tìm được đường")
                 return False 
@@ -251,4 +258,6 @@ class Map:
             mmap[nearest_goal[0]][nearest_goal[1]] = 0
             start_node = nearest_goal
             goal_node.remove(nearest_goal)
-        return t_a_start, t_bfs
+        print("Thời gian giải a*: ", list_t_a_star)
+        print("Thời gian giải BFS: ", list_t_bfs)
+        return t_a_star, t_bfs
