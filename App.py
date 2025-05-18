@@ -1,6 +1,7 @@
 import tkinter as tk
 from time import perf_counter
 from turtle import RawTurtle, ScrolledCanvas, TurtleScreen
+from tkinter import messagebox
 from map_utils import Map
 
 class App:
@@ -84,12 +85,18 @@ class App:
         try:
             m = int(self.entry_m.get())  # đọc chiều cao map từ Entry
             n = int(self.entry_n.get())  # đọc chiều rộng map từ Entry
-            if m <= 0 or n <= 0:
+            if m <= 4 or n <= 4 or m >= 100 or n>=100:
                 raise ValueError
         except Exception:
-            tk.messagebox.showerror("Lỗi nhập liệu", "Vui lòng nhập số nguyên dương cho kích thước bản đồ!")
             self.btn_start.config(state=tk.NORMAL)
-            return
+            messagebox.showerror("Error", "Giá trị không xác định. Vui lòng nhập lại!!") 
+            return False
+        except ValueError:
+            messagebox.showerror("Error", "Số hàng/số cột quá nhỏ. Vui lòng nhập lại!!!") 
+            self.btn_start.config(state=tk.NORMAL)
+            self.entry_m.config(state='normal')
+            self.entry_n.config(state='normal')
+            return False
         # khởi tạo bản đồ, start/goal
         self.mmap = Map.map_init(m,n)
         self.goals = Map.map_random(self.mmap)   # list of 3 goals
@@ -107,30 +114,33 @@ class App:
         self.t1.showturtle()
     
         self.btn_start.config(state=tk.NORMAL)
-    
-    def start(self):
-        self._prepare_map()
-        self.btn_start.config(state=tk.DISABLED)
-        t0 = perf_counter()
-        result = Map.run(self.t, self.t1, self.mmap, self.width_half, self.height_half, self.start, self.goals)
-        dt = perf_counter() - t0
         
-        if result is False:
-            info_text = f"Giải mã thất bại!\nThời gian giải mã: {dt:.3f} giây"
-            self.info_label.config(text=info_text, fg="red")
-        else:
-            t_a_start, t_bfs = result
-            info_text = (f"Giải mã thành công!\n"
-                        f"Tổng thời gian thực thi: {dt:.3f} giây\n"
-                        f"Thời gian A*: {t_a_start:.5f} giây\n"
-                        f"Thời gian BFS: {t_bfs:.5f} giây")
-            self.info_label.config(text=info_text, fg="green")
+        return True 
+    def start(self):
+        if self._prepare_map():
+            self.btn_start.config(state=tk.DISABLED)
+            t0 = perf_counter()
+            result = Map.run(self.t, self.t1, self.mmap, self.width_half, self.height_half, self.start, self.goals)
+            dt = perf_counter() - t0
             
-        self.btn_start.config(state=tk.DISABLED)
-        # hiện info + nút finish/reset
-        self.info_label.pack(pady=(20,5))
-        self.btn_finish.pack(fill=tk.X, pady=2)
-        self.btn_reset.pack(fill=tk.X, pady=2)
+            if result is False:
+                info_text = f"Giải mã thất bại!\nThời gian giải mã: {dt:.3f} giây"
+                self.info_label.config(text=info_text, fg="red")
+            else:
+                t_a_start, t_bfs = result
+                info_text = (f"Giải mã thành công!\n"
+                            f"Tổng thời gian thực thi: {dt:.3f} giây\n"
+                            f"Thời gian A*: {t_a_start:.5f} giây\n"
+                            f"Thời gian BFS: {t_bfs:.5f} giây")
+                self.info_label.config(text=info_text, fg="green")
+                
+            self.btn_start.config(state=tk.DISABLED)
+            # hiện info + nút finish/reset
+            self.info_label.pack(pady=(20,5))
+            self.btn_finish.pack(fill=tk.X, pady=2)
+            self.btn_reset.pack(fill=tk.X, pady=2)
+        else:
+            self.reset()
     def reset(self):
         # ẩn info & nút finish/reset, hiện lại start
         self.info_label.pack_forget()
