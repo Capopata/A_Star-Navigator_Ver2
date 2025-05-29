@@ -1,74 +1,38 @@
-# 🧭 PathRider Ver2 – A* & BFS Pathfinding Visualizer with Turtle
+# 🐢 PathRider – A* Pathfinding Visualizer with Turtle
 
-PathRider Ver2 là một ứng dụng mô phỏng hai thuật toán tìm đường A* và Breadth-First Search (BFS) với giao diện trực quan bằng `turtle` và `tkinter`. Cho phép người dùng nhập kích thước bản đồ, sinh ngẫu nhiên vật cản và mục tiêu, và quan sát trực tiếp quá trình tìm đường.
-
----
-
-## 🚀 Tính năng
-
-- ✅ Nhập kích thước bản đồ (m x n) tùy chỉnh.
-- 🧱 Tự động sinh vật cản và 3 điểm đích ngẫu nhiên.
-- 🧠 Giải thuật tìm đường: A* (màu xanh) và BFS (màu đỏ).
-- ⏱ So sánh thời gian thực thi giữa A* và BFS.
-- 🎯 Hiển thị đường đi chung (màu tím) khi cả hai thuật toán cùng tìm được.
-- 🖥 Giao diện đồ họa dễ sử dụng bằng `tkinter`.
+PathRider là một ứng dụng mô phỏng giải thuật tìm đường A* trực quan bằng thư viện `turtle` trong Python. Ứng dụng vẽ bản đồ mê cung, đánh dấu điểm bắt đầu, các vật cản và đích đến, sau đó cho "rùa" tự tìm đường đi tối ưu.
 
 ---
 
----
+## 🚀 Tính năng chính
 
-## ⚙️ Cài đặt
-
-### 1. Clone repository
-
-```bash
-git clone https://github.com/Capopata/A_Star-Navigator_Ver2.git
-cd A_Star-Navigator_Ver2
-```
-
-### 2. Cài đặt thư viện (nếu cần)
-
-
-> **Lưu ý**: Ứng dụng sử dụng các thư viện chuẩn của Python (`tkinter`, `turtle`, `random`, `heapq`, `time`, `collections`). Nếu dùng Python bản đầy đủ, không cần cài thêm gì.
+- Vẽ bản đồ 2D với lưới, vật cản và đích ngẫu nhiên.
+- Mô phỏng trực quan đường đi A*.
+- Hiển thị thời gian giải mã & trạng thái thành công/thất bại.
+- Giao diện đơn giản, trực quan bằng `tkinter`.
 
 ---
+## 🎨 Giao diện ứng dụng
 
-## ▶️ Cách sử dụng
+![Giao diện mô phỏng A*](assets/image_1.png)
 
-1. Chạy ứng dụng:
+> *Ảnh mô phỏng giao diện ứng dụng PathRider sử dụng turtle + tkinter.*
 
-```bash
-python main.py
-```
+## 🛠️ Yêu cầu cài đặt
 
-2. Trong giao diện:
-
-- Nhập chiều cao (`m`) và chiều rộng (`n`) của bản đồ.
-- Nhấn **"Bắt đầu giải"** để sinh bản đồ và mô phỏng đường đi.
-- Theo dõi đường đi của từng thuật toán và thời gian giải quyết.
+- Python 3.x
+- Các thư viện chuẩn của Python:
+  - `tkinter`
+  - `turtle`
+  - `time`
+  - `heapq`
+  - `random`
 
 ---
 
-## 📁 Cấu trúc thư mục
+## 📦 Cách chạy chương trình
 
-```
-A_Star-Navigator_Ver2/
-├── main.py                 # Thực thi
-├── map_utils.py                  # Sinh bản đồ, điểm start/goal
-├── pathfinding.py          # Thuật toán A* và BFS
-├── App.py                # Giao diện chính
-└── README.md
-```
-
----
-
-## 📌 Ghi chú
-
-- Ứng dụng dùng `ScrolledCanvas` để đảm bảo vùng vẽ hiển thị tốt ngay cả với bản đồ lớn.
-- Rùa thứ 2 (`t1`) sẽ chỉ xuất hiện sau khi bản đồ được sinh thành công.
-
----
-
-## 👨‍💻 Tác giả
-
-- Dự án được phát triển bởi [Capopata](https://github.com/Capopata).
+1. Clone hoặc tải mã nguồn về:
+   ```bash
+   git clone https://github.com/yourusername/pathrider.git
+   cd pathrider
