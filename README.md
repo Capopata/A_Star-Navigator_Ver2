@@ -30,9 +30,3 @@ PathRider là một ứng dụng mô phỏng giải thuật tìm đường A* tr
 
 ---
 
-## 📦 Cách chạy chương trình
-
-1. Clone hoặc tải mã nguồn về:
-   ```bash
-   git clone https://github.com/yourusername/pathrider.git
-   cd pathrider
